@@ -4,9 +4,32 @@ const productsRouter = require("./routes/products");
 
 const app = express();
 
-app.use(express.json());
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      const allowedOrigins = [
+        "http://localhost:3000",
+        "https://kanthos.netlify.app/",
+      ];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow the request
+      } else {
+        callback(new Error("Not allowed by CORS")); // Block the request
+      }
+    },
+    methods: ["GET", "POST"],
+  })
+);
 
 app.use("/api/shops", shopsRouter);
 app.use("/api/products", productsRouter);
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "An unexpected error occurred" });
+});
+
+app.get("/", (req, res) => {
+  res.send("Backend is running!");
+});
 
 module.exports = app;
