@@ -10,7 +10,7 @@ app.use(
     origin: (origin, callback) => {
       const allowedOrigins = [
         "http://localhost:3000",
-        "https://kanthos.netlify.app/products",
+        "https://kanthos.netlify.app",
       ];
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true); 
