@@ -34,5 +34,5 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Backend is running!");
 });
 
-module.exports = app;
+export default app;
 
