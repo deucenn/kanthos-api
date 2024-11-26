@@ -15,7 +15,9 @@ const printifyClient: AxiosInstance = axios.create({
 
 export const getShops = async (): Promise<any> => {
   try {
+    console.time("Fetch shops")
     const response = await printifyClient.get("shops.json");
+    console.timeEnd("Fetch shops")
     return response.data;
   } catch (error) {
     throw new Error(`Error fetching shops: ${(error as Error).message}`);
@@ -24,7 +26,9 @@ export const getShops = async (): Promise<any> => {
 
 export const getProducts = async (shopId: string): Promise<any> => {
   try {
+    console.time("Fetch products")
     const response = await printifyClient.get(`shops/${shopId}/products.json`);
+    console.timeEnd("Fetch products")
     return response.data;
   } catch (error) {
     throw new Error(`Error fetching products: ${(error as Error).message}`);
