@@ -1,6 +1,7 @@
 import cron from "node-cron";
 import axios from "axios";
 
+// Script to call backend itself every 14 minutes so the server stays up.
 export default function startCronJob() {
     cron.schedule("*/14 * * * *", async () => {
         try {
